@@ -29,7 +29,7 @@ if __name__ == "__main__":
         "lambda_": [0.01, 0.1, 1],
         }
 
-    monk_1_best_params = grid_search_cv(randomized_nn_model_monk, (monk_1_X, monk_1_y), monk_1_params, k_folds = 5, direct = True)
+    monk_1_best_params = grid_search_cv(randomized_nn_model_monk, (monk_1_X, monk_1_y), monk_1_params, k_folds = 5, direct = True, path="monk1_randomized.csv")
     monk_1_best_params_other, monk_1_best_params_training = split_train_params(monk_1_best_params, direct = True)
     print(monk_1_best_params_other, monk_1_best_params_training)
 

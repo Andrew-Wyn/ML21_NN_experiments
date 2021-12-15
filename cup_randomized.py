@@ -31,7 +31,7 @@ if __name__ == "__main__":
         "lambda_": [0.1, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     }
 
-    cup_best_params = grid_search_cv(randomized_nn_model_cup, (cup_train_x, cup_train_y), cup_params, k_folds = 5)
+    cup_best_params = grid_search_cv(randomized_nn_model_cup, (cup_train_x, cup_train_y), cup_params, k_folds = 5, path ="cup_randomized.csv")
     cup_best_params_other, cup_best_params_training = split_train_params(cup_best_params, direct = False)
     print(cup_best_params_other, cup_best_params_training)
 

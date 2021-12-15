@@ -37,7 +37,7 @@ if __name__ == "__main__":
         "batch_size" : 64,
         "early_stopping" : 20
     }
-    cup_best_params = grid_search_cv(cup_build_model, (cup_train_x, cup_train_y), cup_params, k_folds = 5)
+    cup_best_params = grid_search_cv(cup_build_model, (cup_train_x, cup_train_y), cup_params, k_folds = 5, path="cup.csv")
     cup_best_params_other, cup_best_params_training = split_train_params(cup_best_params, direct = False)
     print(cup_best_params_other, cup_best_params_training)
 

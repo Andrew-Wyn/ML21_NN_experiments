@@ -34,7 +34,7 @@ if __name__ == "__main__":
         "batch_size": "full"
     }
 
-    monk_1_best_params = grid_search_cv(monk_1_build_model, (monk_1_X, monk_1_y), monk_1_params)
+    monk_1_best_params = grid_search_cv(monk_1_build_model, (monk_1_X, monk_1_y), monk_1_params, path="monk1.csv")
     monk_1_best_params_other, monk_1_best_params_training = split_train_params(monk_1_best_params)
     print(monk_1_best_params_other, monk_1_best_params_training)
 
