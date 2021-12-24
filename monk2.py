@@ -8,6 +8,7 @@ from mlprj.regularizers import *
 from mlprj.initializers import *
 from mlprj.feed_forward import Network, Layer
 from mlprj.randomized_nn import *
+from mlprj.utility import *
 
 
 def monk_2_build_model(learning_rate, alpha):
@@ -41,3 +42,6 @@ if __name__ == "__main__":
     plt.plot(history["loss_tr"])
     plt.plot(history["loss_vl"])
     plt.show()
+
+    print(f"training accuracy: {model_accuracy(model, monk_2_X, monk_2_y)}")
+    print(f"test accuracy: {model_accuracy(model, monk_2_test_x, monk_2_test_y)}")

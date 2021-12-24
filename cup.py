@@ -35,8 +35,7 @@ def cup_build_model_test(learning_rate, alpha, lambdareg = 0, decay = None):
 
 if __name__ == "__main__":
     # Cup data
-    cup_X, cup_y= read_cup()
-    cup_train_x, cup_test_x, cup_train_y, cup_test_y = train_test_split(cup_X, cup_y, test_size=0.10, random_state=42)
+    cup_train_x, cup_test_x, cup_train_y, cup_test_y= read_cup()
     
     cup_params = {
         "learning_rate" : [0.01],

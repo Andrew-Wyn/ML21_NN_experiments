@@ -25,10 +25,10 @@ if __name__ == "__main__":
     monk_1_X, monk_1_test_x, monk_1_y, monk_1_test_y = read_monk(1)
 
     monk_1_params = {
-        "units": [2750, 3000, 3250],
-        "lambda_": [0.01, 0.1, 1],
-        "p_d":[0.1, 0.2], # probability dropout hidden neurons
-        "p_dc":[0.1, 0.2] # probability dropconnect hidden weights
+        "units": [200, 300, 500, 600, 700],
+        "lambda_": [0.01, 0.1, 0.4, 0.5],
+        "p_d":[0.1, 0.2, 0.4], # probability dropout hidden neurons
+        "p_dc":[0.1, 0.2, 0.4] # probability dropconnect hidden weights
         }
 
     monk_1_best_params = grid_search_cv(randomized_nn_model_monk, (monk_1_X, monk_1_y), monk_1_params, k_folds = 5, direct = True, path="monk1_randomized")

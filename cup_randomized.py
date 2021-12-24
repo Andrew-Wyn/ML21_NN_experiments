@@ -23,15 +23,14 @@ def randomized_nn_model_cup(units):
 
 if __name__ == "__main__":
 
-    cup_X, cup_y= read_cup()
-    cup_train_x, cup_test_x, cup_train_y, cup_test_y = train_test_split(cup_X, cup_y, test_size=0.10, random_state=42)
+    cup_train_x, cup_test_x, cup_train_y, cup_test_y= read_cup()
 
     cup_params = {
         "units": [2750, 3000, 3250],
         "lambda_": [0.01, 0.1, 1],
         "p_d":[0.1, 0.2], # probability dropout hidden neurons
         "p_dc":[0.1, 0.2] # probability dropconnect hidden weights
-        }
+    }
 
     cup_best_params = grid_search_cv(randomized_nn_model_cup, (cup_train_x, cup_train_y), cup_params, k_folds = 5, path ="cup_randomized")
     cup_best_params_other, cup_best_params_training = split_train_params(cup_best_params, direct = False)

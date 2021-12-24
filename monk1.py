@@ -41,9 +41,9 @@ if __name__ == "__main__":
     model = monk_1_build_model(**monk_1_best_params_other)
     history = model.training((monk_1_X, monk_1_y), epochs=500, batch_size="full", verbose = True)
 
-    # plt.plot(history["loss_tr"])
-    # plt.plot(history["loss_vl"])
-    # plt.show()
+    plt.plot(history["loss_tr"])
+    plt.plot(history["loss_vl"])
+    plt.show()
 
     print(f"training accuracy: {model_accuracy(model, monk_1_X, monk_1_y)}")
     print(f"test accuracy: {model_accuracy(model, monk_1_test_x, monk_1_test_y)}")
