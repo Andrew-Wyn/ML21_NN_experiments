@@ -1,14 +1,14 @@
 import matplotlib.pyplot as plt
 
 from mlprj.optimizers import StochasticGradientDescent
-from mlprj.datasets import *
-from mlprj.model_selection import *
+from mlprj.datasets import read_monk
+from mlprj.model_selection import grid_search_cv, split_train_params
+from mlprj.feed_forward import Network, Layer
+from mlprj.utility import model_accuracy
+
 from mlprj.losses import *
 from mlprj.regularizers import *
 from mlprj.initializers import *
-from mlprj.feed_forward import Network, Layer
-from mlprj.randomized_nn import *
-from mlprj.utility import *
 
 
 def monk_2_build_model(learning_rate, alpha):
@@ -37,11 +37,13 @@ if __name__ == "__main__":
     print(monk_2_best_params_other, monk_2_best_params_training)
 
     model = monk_2_build_model(**monk_2_best_params_other)
-    history = model.training((monk_2_X, monk_2_y), epochs=500, batch_size="full", verbose = True)
+    history = model.training((monk_2_X, monk_2_y), epochs=500, batch_size="full", verbose = True, accuracy_curve=True)
 
     plt.plot(history["loss_tr"])
-    plt.plot(history["loss_vl"])
     plt.show()
 
-    print(f"training accuracy: {model_accuracy(model, monk_2_X, monk_2_y)}")
+    plt.plot(history["accuracy_tr"])
+    plt.show()
+
+    print(f"training accuracy: {history['accuracy_tr'][-1]}")
     print(f"test accuracy: {model_accuracy(model, monk_2_test_x, monk_2_test_y)}")

@@ -1,24 +1,16 @@
-import matplotlib.pyplot as plt
-
-from mlprj.optimizers import StochasticGradientDescent
-from mlprj.datasets import *
-from mlprj.model_selection import *
-from mlprj.losses import *
-from mlprj.regularizers import *
-from mlprj.initializers import *
-from mlprj.feed_forward import Network, Layer
-from mlprj.randomized_nn import *
-from mlprj.utility import *
+from mlprj.datasets import read_monk
+from mlprj.model_selection import grid_search_cv, split_train_params
+from mlprj.utility import model_accuracy
+from mlprj.randomized_nn import RandomizedLayer, RandomizedNetwork
+from mlprj.losses import MSE
 
 
 def randomized_nn_model_monk(units):
-    nn = RandomizedNetwork(17, [
-        RandomizedLayer(units, "sigmoid"),
-        RandomizedLayer(1, "linear"),
-        ])
+    nn = RandomizedNetwork(17, RandomizedLayer(units, "sigmoid"), 1)
     nn.compile(loss = MSE())
     
     return nn
+
 
 if __name__ == "__main__":
     monk_2_X, monk_2_test_x, monk_2_y, monk_2_test_y = read_monk(2)

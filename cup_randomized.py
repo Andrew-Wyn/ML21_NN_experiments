@@ -1,24 +1,13 @@
-import matplotlib.pyplot as plt
-
-from mlprj.optimizers import StochasticGradientDescent
-from mlprj.datasets import *
-from mlprj.model_selection import *
-from mlprj.losses import *
-from mlprj.regularizers import *
-from mlprj.initializers import *
-from mlprj.feed_forward import Network, Layer
-from mlprj.randomized_nn import *
-from sklearn.model_selection import train_test_split
+from mlprj.datasets import read_cup
+from mlprj.model_selection import grid_search_cv, split_train_params
+from mlprj.randomized_nn import RandomizedLayer, RandomizedNetwork
+from mlprj.losses import MSE
 
 
 def randomized_nn_model_cup(units):
-    nn = RandomizedNetwork(10, [
-        RandomizedLayer(units, "relu"),
-        RandomizedLayer(2, "linear")
-    ])
-    
+    nn = RandomizedNetwork(10, RandomizedLayer(units, "sigmoid"), 2)
     nn.compile(loss=MSE())
-    
+
     return nn
 
 if __name__ == "__main__":
