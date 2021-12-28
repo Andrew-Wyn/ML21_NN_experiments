@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print(monk_2_best_params_other, monk_2_best_params_training)
 
     model = randomized_nn_model_monk(**monk_2_best_params_other)
-    error_tr, error_vl = model.direct_training((monk_2_X, monk_2_y), **monk_2_best_params_training, verbose = True)
+    history = model.direct_training((monk_2_X, monk_2_y), **monk_2_best_params_training, verbose = True)
 
     print(f"training accuracy: {model_accuracy(model, monk_2_X, monk_2_y, threshold = 0.5)}")
     print(f"test accuracy: {model_accuracy(model, monk_2_test_x, monk_2_test_y, threshold = 0.5)}")

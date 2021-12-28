@@ -1,7 +1,8 @@
 from mlprj.datasets import read_cup
 from mlprj.model_selection import grid_search_cv, split_train_params
 from mlprj.randomized_nn import RandomizedLayer, RandomizedNetwork
-from mlprj.losses import MSE
+from mlprj.losses import MSE, MEE
+from mlprj.utility import model_loss
 
 
 def randomized_nn_model_cup(units):
@@ -12,19 +13,21 @@ def randomized_nn_model_cup(units):
 
 if __name__ == "__main__":
 
-    cup_train_x, cup_test_x, cup_train_y, cup_test_y= read_cup()
+    X, test_x, y, test_y, _= read_cup()
 
     cup_params = {
-        "units": [2750, 3000, 3250],
-        "lambda_": [0.01, 0.1, 1],
-        "p_d":[0.1, 0.2], # probability dropout hidden neurons
-        "p_dc":[0.1, 0.2] # probability dropconnect hidden weights
+        "units": [200, 400, 600, 800, 1000],
+        "lambda_": [0, 0.01, 0.1, 1, 10, 100],
+        "p_d":[0, 0.2, 0.4, 0.6, 0.8, 1], # probability dropout hidden neurons
+        "p_dc":[0, 0.2, 0.4, 0.6, 0.8, 1] # probability dropconnect hidden weights
     }
 
-    cup_best_params = grid_search_cv(randomized_nn_model_cup, (cup_train_x, cup_train_y), cup_params, k_folds = 5, path ="cup_randomized")
-    cup_best_params_other, cup_best_params_training = split_train_params(cup_best_params, direct = False)
+    cup_best_params = grid_search_cv(randomized_nn_model_cup, (X, y), cup_params, k_folds = 5, path ="cup_randomized", direct=True)
+    cup_best_params_other, cup_best_params_training = split_train_params(cup_best_params, direct=True)
     print(cup_best_params_other, cup_best_params_training)
 
     model = randomized_nn_model_cup(**cup_best_params_other)
-    error_tr, error_vl = model.direct_training(((cup_train_x, cup_train_y), (cup_test_x, cup_test_y)), **cup_best_params_training, verbose = True)
+    history = model.direct_training((X, y), **cup_best_params_training, verbose=True)
 
+    print(f"train MEE loss: {model_loss(model, MEE(), X, y)}")
+    print(f"test MEE loss: {model_loss(model, MEE(), test_x, test_y)}")

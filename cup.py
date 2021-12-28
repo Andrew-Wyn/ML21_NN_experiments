@@ -8,6 +8,7 @@ from mlprj.feed_forward import Network, Layer
 from mlprj.losses import *
 from mlprj.regularizers import *
 from mlprj.initializers import *
+from mlprj.utility import model_loss
 
 
 def cup_build_model_train(learning_rate, alpha, lambdareg = 0, decay = None):
@@ -35,7 +36,7 @@ def cup_build_model_test(learning_rate, alpha, lambdareg = 0, decay = None):
 
 if __name__ == "__main__":
     # Cup data
-    cup_train_x, cup_test_x, cup_train_y, cup_test_y= read_cup()
+    X, test_x, y, test_y= read_cup()
     
     cup_params = {
         "learning_rate" : [0.01],
@@ -45,13 +46,15 @@ if __name__ == "__main__":
         "batch_size" : "full",
         "early_stopping" : 20
     }
-    cup_best_params = grid_search_cv(cup_build_model_train, (cup_train_x, cup_train_y), cup_params, k_folds = 5, path="cup")
+    cup_best_params = grid_search_cv(cup_build_model_train, (X, y), cup_params, k_folds = 5, path="cup")
     cup_best_params_other, cup_best_params_training = split_train_params(cup_best_params, direct = False)
     print(cup_best_params_other, cup_best_params_training)
 
     model = cup_build_model_test(**cup_best_params_other)
-    history = model.training((cup_train_x, cup_train_y), (cup_test_x, cup_test_y), **cup_best_params_training, verbose = True)
+    history = model.training((X, y), **cup_best_params_training, verbose = True)
 
     plt.plot(history["loss_tr"])
-    plt.plot(history["loss_vl"])
     plt.show()
+
+    print(f"train MEE loss: {model_loss(model, MEE(), X, y)}")
+    print(f"test MEE loss: {model_loss(model, MEE(), test_x, test_y)}")
