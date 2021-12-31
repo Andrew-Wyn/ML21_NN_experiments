@@ -22,7 +22,6 @@ def monk_1_build_model(learning_rate, alpha):
     return nn
 
 
-
 if __name__ == "__main__":
 
     # Monk-1 datas

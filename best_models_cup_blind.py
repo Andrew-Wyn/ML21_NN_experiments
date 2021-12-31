@@ -53,6 +53,8 @@ def cup_build_model_rand(units):
     nn = RandomizedNetwork(10, RandomizedLayer(units, "sigmoid"), 2)
     nn.compile(loss=MEE())
     return nn
+
+
 if __name__ == "__main__":
 
   X, test_x, y, test_y, preprocesser = read_cup()
@@ -84,7 +86,6 @@ if __name__ == "__main__":
   history7 = model7.direct_training((X,y), (test_x, test_y), lambda_=10, p_d=0, p_dc=0)
   print("Model 7 trained")
 
-  '''
   plt.plot(history1["loss_tr"], label = "training error")
   plt.plot(history1["loss_vl"], linestyle = "dashed",  label = "internal test set error", color = "r")
   plt.xlabel('Epochs', fontsize=14)
@@ -126,7 +127,6 @@ if __name__ == "__main__":
   plt.ylabel('Loss(MEE)', fontsize=14)
   plt.legend()
   plt.show()
-  '''
 
   print("training error model 7 (randomized) : ", history7["loss_tr"])
   print("test error model 7 (randomized) : ", history7["loss_vl"])
@@ -135,13 +135,10 @@ if __name__ == "__main__":
   ts_results = [history1["loss_vl"][-1], history2["loss_vl"][-1], history3["loss_vl"][-1], history4["loss_vl"][-1], history5["loss_vl"][-1], history6["loss_vl"][-1], history7["loss_vl"]]
   mean_tr_error = np.mean(np.array(tr_results))
   mean_ts_error = np.mean(np.array(ts_results))
-  print(tr_results)
-  print(ts_results)
 
   print(f"L'errore medio nel training set è: {mean_tr_error}")
   print(f"L'errore medio nell' internal test set è: {mean_ts_error}")
 
-  '''
   final = Ensemble([model1, model2 ,model3 ,model4 ,model5 ,model6, model7])
 
   print(f"Ensamble MEE over training: {model_loss(final, MEE(), X, y)}")
@@ -150,9 +147,18 @@ if __name__ == "__main__":
   blind_test_predicted = final.predict(blind_test_x)
 
   with open("blind_test_predicted.csv", "w") as f:
-      writer = csv.writer(f)
-      for i, row in enumerate(blind_test_predicted, 1):
-        row = row.tolist()
-        row.insert(0,i)
-        writer.writerow(row)
-  '''
+    header_blind_str = None
+
+    with open("header_blind_test.txt", "r") as h:
+      header_blind_str = h.readlines()
+
+    header_blind_str += ["\n"]
+    print(header_blind_str)
+
+    f.writelines(header_blind_str)
+
+    writer = csv.writer(f)
+    for i, row in enumerate(blind_test_predicted, 1):
+      row = row.tolist()
+      row.insert(0,i)
+      writer.writerow(row)
