@@ -84,35 +84,49 @@ if __name__ == "__main__":
   history7 = model7.direct_training((X,y), (test_x, test_y), lambda_=10, p_d=0, p_dc=0)
   print("Model 7 trained")
 
+  '''
   plt.plot(history1["loss_tr"], label = "training error")
-  plt.plot(history1["loss_vl"], linestyle = "dashed",  label = "internal test set error")
+  plt.plot(history1["loss_vl"], linestyle = "dashed",  label = "internal test set error", color = "r")
+  plt.xlabel('Epochs', fontsize=14)
+  plt.ylabel('Loss(MEE)', fontsize=14)
   plt.legend()
   plt.show()
 
   plt.plot(history2["loss_tr"], label = "training error")
-  plt.plot(history2["loss_vl"], linestyle = "dashed",  label = "internal test set error")
+  plt.plot(history2["loss_vl"], linestyle = "dashed",  label = "internal test set error", color = "r")
+  plt.xlabel('Epochs', fontsize=14)
+  plt.ylabel('Loss(MEE)', fontsize=14)
   plt.legend()
   plt.show()
 
   plt.plot(history3["loss_tr"], label = "training error")
-  plt.plot(history3["loss_vl"], linestyle = "dashed",  label = "internal test set error")
+  plt.plot(history3["loss_vl"], linestyle = "dashed",  label = "internal test set error", color = "r")
+  plt.xlabel('Epochs', fontsize=14)
+  plt.ylabel('Loss(MEE)', fontsize=14)
   plt.legend()
   plt.show()
 
   plt.plot(history4["loss_tr"], label = "training error")
-  plt.plot(history4["loss_vl"], linestyle = "dashed",  label = "internal test set error")
+  plt.plot(history4["loss_vl"], linestyle = "dashed",  label = "internal test set error", color = "r")
+  plt.xlabel('Epochs', fontsize=14)
+  plt.ylabel('Loss(MEE)', fontsize=14)
   plt.legend()
   plt.show()
 
   plt.plot(history5["loss_tr"], label = "training error")
-  plt.plot(history5["loss_vl"], linestyle = "dashed",  label = "internal test set error")
+  plt.plot(history5["loss_vl"], linestyle = "dashed",  label = "internal test set error", color = "r")
+  plt.xlabel('Epochs', fontsize=14)
+  plt.ylabel('Loss(MEE)', fontsize=14)
   plt.legend()
   plt.show()
 
   plt.plot(history6["loss_tr"], label = "training error")
-  plt.plot(history6["loss_vl"], linestyle = "dashed",  label = "internal test set error")
+  plt.plot(history6["loss_vl"], linestyle = "dashed",  label = "internal test set error", color = "r")
+  plt.xlabel('Epochs', fontsize=14)
+  plt.ylabel('Loss(MEE)', fontsize=14)
   plt.legend()
   plt.show()
+  '''
 
   print("training error model 7 (randomized) : ", history7["loss_tr"])
   print("test error model 7 (randomized) : ", history7["loss_vl"])
@@ -121,10 +135,13 @@ if __name__ == "__main__":
   ts_results = [history1["loss_vl"][-1], history2["loss_vl"][-1], history3["loss_vl"][-1], history4["loss_vl"][-1], history5["loss_vl"][-1], history6["loss_vl"][-1], history7["loss_vl"]]
   mean_tr_error = np.mean(np.array(tr_results))
   mean_ts_error = np.mean(np.array(ts_results))
+  print(tr_results)
+  print(ts_results)
 
   print(f"L'errore medio nel training set è: {mean_tr_error}")
   print(f"L'errore medio nell' internal test set è: {mean_ts_error}")
 
+  '''
   final = Ensemble([model1, model2 ,model3 ,model4 ,model5 ,model6, model7])
 
   print(f"Ensamble MEE over training: {model_loss(final, MEE(), X, y)}")
@@ -138,3 +155,4 @@ if __name__ == "__main__":
         row = row.tolist()
         row.insert(0,i)
         writer.writerow(row)
+  '''
