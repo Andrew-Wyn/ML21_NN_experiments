@@ -1,4 +1,4 @@
 # Simone Manti  Maria Cassese  Luca Moroni
-# the-space-stars
+# space-stars
 # ML-CUP21
 # gg-01-2022
