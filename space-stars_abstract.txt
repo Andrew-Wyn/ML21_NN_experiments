@@ -1,0 +1,5 @@
+We performed a coarse-to-fine grid-search combined with a 5-fold
+cross-validation to select 7 best models.
+We used an ensamble model to privide a final model, in which 
+6 models are classical feed forward neural network with different size
+and hyperparameters and one is an extreme learning machine.
