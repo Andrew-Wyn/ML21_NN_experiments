@@ -132,4 +132,4 @@ dmypy.json
 .idea
 .DS_Store
 *.csv
-!blind_test_predicted.csv
+!space-stars_ML-CUP21-TS.csv
