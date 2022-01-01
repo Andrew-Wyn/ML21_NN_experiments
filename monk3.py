@@ -27,14 +27,15 @@ def monk_3_build_model(learning_rate, alpha, lambdareg = 0):
 
 if __name__ == "__main__":
     # Monk-1 datas
-    monk_3_X, monk_3_test_x, monk_3_y, monk_3_test_y = read_monk(3)
+    monk_3_X, monk_3_test_x, monk_3_y, monk_3_test_y, _ = read_monk(3)
 
+    # set this dictionary to do the grid search
     monk_3_params = {
-        "learning_rate": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-        "alpha": [0.1, 0.2, 0.3, 0.4, 0.5],
-        "lambdareg": [0, 0.0001, 0.001],
-        "epochs": 500,
-        "batch_size": "full"
+        "learning_rate": [...],
+        "alpha": [...],
+        "lambdareg": [...],
+        "epochs": [...],
+        "batch_size": [...]
     }
 
     monk_3_best_params = grid_search_cv(monk_3_build_model, (monk_3_X, monk_3_y), monk_3_params, path="monk3")

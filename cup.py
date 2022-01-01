@@ -38,14 +38,16 @@ if __name__ == "__main__":
     # Cup data
     X, test_x, y, test_y= read_cup()
     
+    # set this dictionary to do the grid search
     cup_params = {
-        "learning_rate" : [0.01],
-        "alpha" : [0.15],
-        "lambdareg" : [0.00001],
-        "epochs" : 5,
-        "batch_size" : "full",
-        "early_stopping" : 20
+        "learning_rate" : [...],
+        "alpha" : [...],
+        "lambdareg" : [...],
+        "epochs" : [...],
+        "batch_size" : [...],
+        "early_stopping" : [...]
     }
+    
     cup_best_params = grid_search_cv(cup_build_model_train, (X, y), cup_params, k_folds = 5, path="cup")
     cup_best_params_other, cup_best_params_training = split_train_params(cup_best_params, direct = False)
     print(cup_best_params_other, cup_best_params_training)

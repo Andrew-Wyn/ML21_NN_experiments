@@ -13,14 +13,15 @@ def randomized_nn_model_monk(units):
 
 
 if __name__ == "__main__":
-   
-    monk_3_X, monk_3_test_x, monk_3_y, monk_3_test_y = read_monk(3)
+    monk_3_X, monk_3_test_x, monk_3_y, monk_3_test_y, _ = read_monk(3)
+
+    # set this dictionary to do the grid search
     monk_3_params = {
-        "units": [2750, 3000, 3250],
-        "lambda_": [0.01, 0.1, 1],
-        "p_d":[0.1, 0.2], # probability dropout hidden neurons
-        "p_dc":[0.1, 0.2] # probability dropconnect hidden weights
-        }
+        "units": [...],
+        "lambda_": [...],
+        "p_d":[...], # probability dropout hidden neurons
+        "p_dc":[...] # probability dropconnect hidden weights
+    }
 
     monk_3_best_params = grid_search_cv(randomized_nn_model_monk, (monk_3_X, monk_3_y), monk_3_params, k_folds=5, direct=True, path="monk3_randomized")
     monk_3_best_params_other, monk_3_best_params_training = split_train_params(monk_3_best_params, direct=True)

@@ -24,12 +24,14 @@ def monk_2_build_model(learning_rate, alpha):
 
 
 if __name__ == "__main__":
-    monk_2_X, monk_2_test_x, monk_2_y, monk_2_test_y = read_monk(2)
+    monk_2_X, monk_2_test_x, monk_2_y, monk_2_test_y, _ = read_monk(2)
+
+    # set this dictionary to do the grid search
     monk_2_params = {
-        "learning_rate": [0.7, 0.8],
-        "alpha": [0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
-        "epochs": 500,
-        "batch_size": "full"
+        "learning_rate": [...],
+        "alpha": [...],
+        "epochs": [...],
+        "batch_size": [...]
     }
 
     monk_2_best_params = grid_search_cv(monk_2_build_model, (monk_2_X, monk_2_y), monk_2_params, path="monk2")

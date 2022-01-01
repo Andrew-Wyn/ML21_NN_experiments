@@ -15,11 +15,12 @@ if __name__ == "__main__":
 
     X, test_x, y, test_y, _= read_cup()
 
+    # set this dictionary to do the grid search
     cup_params = {
-        "units": [200, 400, 600, 800, 1000],
-        "lambda_": [0, 0.01, 0.1, 1, 10, 100],
-        "p_d":[0, 0.2, 0.4, 0.6, 0.8, 1], # probability dropout hidden neurons
-        "p_dc":[0, 0.2, 0.4, 0.6, 0.8, 1] # probability dropconnect hidden weights
+        "units": [...],
+        "lambda_": [...],
+        "p_d":[...], # probability dropout hidden neurons
+        "p_dc":[...] # probability dropconnect hidden weights
     }
 
     cup_best_params = grid_search_cv(randomized_nn_model_cup, (X, y), cup_params, k_folds = 5, path ="cup_randomized", direct=True)
