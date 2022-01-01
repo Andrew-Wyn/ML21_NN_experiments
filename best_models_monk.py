@@ -45,19 +45,20 @@ def mean_fun(units, training, test, learning_rate, alpha, lambdareg,  epochs, ba
     mean["accuracy_ts"][:] = [x / trials for x in mean["accuracy_ts"]]
     return mean
 
-monk_1_X, monk_1_test_x, monk_1_y, monk_1_test_y, _ = read_monk(1)
-monk_2_X, monk_2_test_x, monk_2_y, monk_2_test_y, _ = read_monk(2)
-monk_3_X, monk_3_test_x, monk_3_y, monk_3_test_y, _ = read_monk(3)   
+if __name__ == "__main__":
+    monk_1_X, monk_1_test_x, monk_1_y, monk_1_test_y, _ = read_monk(1)
+    monk_2_X, monk_2_test_x, monk_2_y, monk_2_test_y, _ = read_monk(2)
+    monk_3_X, monk_3_test_x, monk_3_y, monk_3_test_y, _ = read_monk(3)   
 
-mean = mean_fun(16, (monk_3_X, monk_3_y), (monk_3_test_x, monk_3_test_y), learning_rate = 0.8, alpha = 0.6, lambdareg = 0.001, epochs = 50, batch_size = "full", trials = 10)
+    mean = mean_fun(16, (monk_3_X, monk_3_y), (monk_3_test_x, monk_3_test_y), learning_rate = 0.8, alpha = 0.6, lambdareg = 0.001, epochs = 50, batch_size = "full", trials = 10)
 
-plt.plot(mean["loss_tr"])
-plt.plot(mean["loss_vl"])
-plt.show()
+    plt.plot(mean["loss_tr"])
+    plt.plot(mean["loss_vl"])
+    plt.show()
 
-plt.plot(mean["accuracy_tr"])
-plt.plot(mean["accuracy_ts"])
-plt.show()
+    plt.plot(mean["accuracy_tr"])
+    plt.plot(mean["accuracy_ts"])
+    plt.show()
 
-print(f"training accuracy: {mean['accuracy_tr'][-1]}")
-print(f"test accuracy: {mean['accuracy_ts'][-1]}")
+    print(f"training accuracy: {mean['accuracy_tr'][-1]}")
+    print(f"test accuracy: {mean['accuracy_ts'][-1]}")
